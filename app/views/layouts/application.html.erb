@@ -14,10 +14,10 @@
   <body>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <h3>Bienvenido <%= current_user.name%>! </h3>
 
       <% if user_signed_in? %>
-        <%= link_to 'Cerrar sesión', destroy_user_session_path, mehotd: :delete%>
+        <h3>Bienvenido <%= current_user.name%>! </h3>
+        <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to 'Crear cuenta', new_user_registration_path %>
         <%= link_to 'Iniciar sesión', new_user_session_path%>

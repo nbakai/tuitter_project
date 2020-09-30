@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   # POST /tweets
   # POST /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.new(tweet_params.merge(user: current_user))
     @tweet.user_id = current_user.id
 
     respond_to do |format|
@@ -45,6 +45,9 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
+
+    @tweet = Tweet.find(params[:id])
+        @tweet.update(like: !@tweet.like ) 
     respond_to do |format|
       if @tweet.update(tweet_params)
         format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
@@ -74,6 +77,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:title, :content, :user)
+      params.require(:tweet).permit(:title, :content, :user, :like)
     end
 end

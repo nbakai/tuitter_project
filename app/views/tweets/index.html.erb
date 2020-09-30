@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Tweets</h1>
 
@@ -17,11 +16,11 @@
       <tr>
         <td><%= tweet.title %></td>
         <td><%= tweet.content %></td>
-        <td><%= tweet.user %></td>
-        <td><%= link_to 'Show', tweet %></td>
+        <td><%= tweet.user_id %></td>
+        <td><%= link_to 'Mostrar', tweet %></td>
         <% if user_signed_in? && tweet.user_id == current_user.id%>
-          <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-          <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+          <td><%= link_to 'Editar', edit_tweet_path(tweet) %></td>
+          <td><%= link_to 'Borrar', tweet, method: :delete, data: { confirm: 'Estás seguro?' } %></td>  
         <%end%>
       </tr>
     <% end %>
@@ -30,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
+<%= link_to 'Nuevo Tweet', new_tweet_path %>
