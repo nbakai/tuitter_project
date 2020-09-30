@@ -19,9 +19,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= current_user.name %>
+  <%= @tweet.user.name %>
 </p>
-
+<p>
+  <%=image_tag"#{@tweet.user.picture}"%> 
+</p>
+<p><%= time_ago_in_words(@tweet.created_at) %></p>
 
 
 <%= link_to 'Editar', edit_tweet_path(@tweet) %> |
