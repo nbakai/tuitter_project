@@ -1,25 +1,27 @@
 
-<h1>Twitter</h1>
+
 <% if user_signed_in?%>
   <%= form_with(model: @tweet=Tweet.new, local: true) do |form| %>
       
-      <div class="field">
-        <%= form.label :title %>
+    
+
+      <div class="form-group">
+        <%= form.label :title %> <br>
         <%= form.text_field :title %>
       </div>
 
-      <div class="field">
-        <%= form.label :content %>
+      <div class="form-group">
+        <%= form.label :content %> <br>
         <%= form.text_area :content %>
       </div>
 
 
       <div class="actions">
-        <%= form.submit %>
+        <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
       </div>
   <% end %>
 <%end%>
-
+<br>
 <table>
   <thead>
     <tr>
