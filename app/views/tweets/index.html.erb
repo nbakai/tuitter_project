@@ -1,5 +1,24 @@
 
 <h1>Twitter</h1>
+<% if user_signed_in?%>
+  <%= form_with(model: @tweet, local: true) do |form| %>
+
+      <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= form.label :content %>
+        <%= form.text_area :content %>
+      </div>
+
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+  <% end %>
+<%end%>
 
 <table>
   <thead>
@@ -32,5 +51,11 @@
 </table>
 
 <br>
-
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    
+    <%= link_to_next_page @tweets, 'Mostrar más tweets >>' %>
+  </div>
+</div>
+<br>
 <%= link_to 'Nuevo Tweet', new_tweet_path %>

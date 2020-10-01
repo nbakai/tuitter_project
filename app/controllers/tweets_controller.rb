@@ -6,6 +6,8 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     @tweets = Tweet.all
+    @tweets = Tweet.page(params[:page])
+   
   end
 
   # GET /tweets/1
@@ -82,4 +84,5 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:title, :content, :user, :like)
     end
+  
 end
