@@ -1,5 +1,4 @@
-
-
+<br>
 <p>
   <strong>Title:</strong>
   <%= @tweet.title %>
@@ -24,7 +23,7 @@
   <%= @tweet.user.name %>
 </p>
 <p>
-  <%=image_tag"#{@tweet.user.picture}"%> 
+  <%=image_tag"#{@tweet.user.picture}", style: 'height:300px; width:300px;'%> 
 </p>
 <p><%= time_ago_in_words(@tweet.created_at) %></p>
 
