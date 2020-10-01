@@ -6,8 +6,9 @@ class LikesController < ApplicationController
             flash[:notice] = "You can't like more than once"
         else
             @tweet.likes.create(user_id: current_user.id)
+            redirect_to root_path(@tweet)
         end
-        redirect_to tweet_path(@tweet)
+        
         
     end
 

@@ -3,7 +3,7 @@ class RetweetsController < ApplicationController
     before_action :find_retweet, only: [:destroy]
     def create
         @tweet.retweets.create(user_id: current_user.id)
- 
+        
     end
     def destroy
        @retweet.destroy
