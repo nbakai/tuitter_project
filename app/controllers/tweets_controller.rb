@@ -18,7 +18,11 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    @tweet = Tweet.new
+    if !@retweet.nil?
+      @retweet = Tweet.find(params[:id])
+    else
+      @tweet = Tweet.new
+    end
   end
 
   # GET /tweets/1/edit

@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   devise_scope :user do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
+  post "tweets/:id/retweets/:id"    => "retweets#new"
   resources :tweets do 
-    resources :likes 
+    resources :likes
+    resources :retweets 
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'tweets#index'

@@ -41,7 +41,7 @@
         <%# <td><%= tweet.user.name if tweet.user </td>%> 
         <td><%=image_tag"#{tweet.user.picture}", style: 'height:75px; width:75px;'%> </td>
         <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></td>
-         <td></td>
+        <td><%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></td>
         <td><%= link_to 'Mostrar', tweet %></td>
         <% if user_signed_in? && tweet.user_id == current_user.id%>
           <td><%= link_to 'Editar', edit_tweet_path(tweet) %></td>

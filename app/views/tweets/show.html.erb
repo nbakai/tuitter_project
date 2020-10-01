@@ -1,4 +1,27 @@
 <br>
+<% if !@retweet.nil?%>
+  
+    <p>
+        <strong>Title:</strong>
+        <%= @retweet.title %>
+    </p>
+
+    <p>
+        <strong>Content:</strong>
+        <%= @retweet.content %>
+    </p>
+
+    <p><%= @retweet.likes.count %> <%= (@retweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+    <p><%= @retweet.retweets.count %> <%= (@retweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
+    <p>
+        <strong>User:</strong>
+        <%= @retweet.user.name %>
+    </p>
+    <p>
+        <%=image_tag"#{@retweet.user.picture}", style: 'height:300px; width:300px;'%> 
+    </p>
+    <p><%= time_ago_in_words(@retweet.created_at) %></p>
+<%end%>
 <p>
   <strong>Title:</strong>
   <%= @tweet.title %>
@@ -8,6 +31,8 @@
   <strong>Content:</strong>
   <%= @tweet.content %>
 </p>
+
+
 <% pre_like = @tweet.likes.find { |like| like.user_id == current_user.id} %>
 <% if pre_like %>
   <%= link_to raw('&#x1F494;'), tweet_like_path(@tweet, pre_like), method: :delete %>
@@ -17,7 +42,13 @@
 <% end %>
 
 <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-
+<% pre_retweet = @tweet.retweets.find { |retweet| retweet.user_id == current_user.id} %>
+<% if pre_retweet %>
+  <%= button_to 'Unretweet', tweet_retweet_path(@tweet, pre_retweet), method: :delete %>
+<% else %>
+  <%= link_to 'Retweet', new_tweet_path(@retweet) %>
+<% end %>
+<p><%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
 <p>
   <strong>User:</strong>
   <%= @tweet.user.name %>
