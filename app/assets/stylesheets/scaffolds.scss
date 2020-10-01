@@ -1,11 +1,16 @@
-// body {
-//   background-color: #fff;
-//   color: #333;
-//   margin: 33px;
-//   font-family: verdana, arial, helvetica, sans-serif;
-//   font-size: 13px;
-//   line-height: 18px;
-// }
+*{
+    margin: 0;
+}
+body{
+    padding-left: 20px;
+    font-family: 'Inconsolata', monospace;
+    
+}
+
+h1, h3{
+    font-family: 'Mukta', sans-serif;
+    font-weight: 800;
+}
 
 // p, ol, ul, td {
 //   font-family: verdana, arial, helvetica, sans-serif;

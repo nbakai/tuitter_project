@@ -23,12 +23,12 @@
     <p><%= time_ago_in_words(@retweet.created_at) %></p>
 <%end%>
 <p>
-  <strong>Title:</strong>
+  <strong>Título:</strong>
   <%= @tweet.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>Tweet:</strong>
   <%= @tweet.content %>
 </p>
 
@@ -59,11 +59,10 @@
   <strong>User:</strong>
   <%= @tweet.user.name %>
 </p>
-<p>
-  <%=image_tag"#{@tweet.user.picture}", style: 'height:300px; width:300px;'%> 
-</p>
-<p><%= time_ago_in_words(@tweet.created_at) %></p>
 
+<p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>
 
-<%= link_to 'Editar', edit_tweet_path(@tweet) %> |
+<% if @tweet.user == current_user %>
+    <%= link_to 'Editar', edit_tweet_path(@tweet) %> <hr>
+<%end%>
 <%= link_to 'Atrás', tweets_path %>
