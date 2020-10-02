@@ -49,7 +49,7 @@
 <%end%>
 <br>
 
-<%= link_to 'Retweet', new_tweet_path(@tweet.tweet_id), method: :post %> 
+<%= link_to 'Retweet', new_tweet_path(@tweet), method: :post %> 
 
 <p><%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
 <p>
