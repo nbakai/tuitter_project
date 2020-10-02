@@ -41,7 +41,7 @@
   <%= button_to 'Follow' %>
 </p>
 <p><%= link_to 'Retweet', tweets_path(@tweet.id), method: :post %>
-  <%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>
+  
 </p>
 <br>
 <p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>

@@ -3,9 +3,9 @@
 
    
 <% if @retweet? %>
-  <% @retweet = Tweet.find(tweet_id) %>
-    <h3>Tweet <%= retweet.content %> </h3>
-    <p> Autor: <%= retweet.user.name %> </p>
+  <% @tweet = Tweet.find(:id) %>
+    <h3>Tweet <%= @tweet.content %> </h3>
+    <p> Autor: <%= @tweet.user.name %> </p>
 <%else%>
     <%= render 'form', tweet: @tweet %>
 <%end%>

@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-  attr_accessor :content
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: :index
 

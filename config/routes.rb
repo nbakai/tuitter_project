@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   
   resources :tweets do 
+    get 'tweets/:id', to: 'tweets#show', as: 'retweet'
     resources :likes
   end
  
