@@ -11,19 +11,21 @@
 </p>
 
 
-<div>
+<div >
+  <h2>
   <% pre_like = @tweet.likes.find { |like| like.user_id == current_user.id} %>
   <% if pre_like %>
-    <%= link_to raw('&#x1F494;'), tweet_like_path(@tweet, pre_like), method: :delete %>
+   <%= link_to raw('&#128128;'), tweet_like_path(@tweet, pre_like), method: :delete %> 
   <% else %>
     <%= link_to raw('&#x1F495;'), tweet_likes_path(@tweet), method: :post %>
     
   <% end %>
+  </h2>
 </div>
 <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
 <% @tweet.likes.each do |tweet| %>
             <tr>
-                <td><%=image_tag"#{tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
+                <td><%=image_tag"#{@tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
             </tr>
 <%end%>
 <br>
@@ -31,12 +33,17 @@
 <%= link_to 'Retweet', new_tweet_path(@retweet = @tweet.id)%>
 
 
+
 <p>
   <strong>Autor:</strong>
   <%= @tweet.user.name %>
-  <%=image_tag"#{@tweet.user.picture}", style: 'height:50px; width:50px;'%>
+  <%=image_tag"#{@tweet.user.picture}", style: 'height:45px; width:45px;'%>
+  <%= button_to 'Follow' %>
 </p>
-
+<p><%= link_to 'Retweet', tweets_path(@tweet.id), method: :post %>
+  <%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>
+</p>
+<br>
 <p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>
 
 
