@@ -1,5 +1,6 @@
-
-
+<% if !user_signed_in?%>
+<h2> Crea una nueva cuenta o inicia sesión para ver Tweets!<i class="fa fa-twitter"> </i></h2>
+<% end %>
 <% if user_signed_in?%>
   <%= form_with(model: @tweet=Tweet.new, local: true) do |form| %>
       
@@ -21,7 +22,7 @@
       </div>
     </div>
   <% end %>
-<%end%>
+
 <br>
 <hr>
 <table>
@@ -77,3 +78,4 @@
 <%= link_to 'Nuevo Tweet', new_tweet_path %>
 <br>
 <%= link_to 'Inicio', root_path %>
+<%end%>
