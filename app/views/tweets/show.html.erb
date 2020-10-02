@@ -1,27 +1,5 @@
 <br>
-<% if !@retweet.nil?%>
-  
-    <p>
-        <strong>Title:</strong>
-        <%= @retweet.title %>
-    </p>
 
-    <p>
-        <strong>Content:</strong>
-        <%= @retweet.content %>
-    </p>
-
-    <p><%= @retweet.likes.count %> <%= (@retweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-    <p><%= @retweet.retweets.count %> <%= (@retweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
-    <p>
-        <strong>Autor:</strong>
-        <%= @retweet.user.name %>
-    </p>
-    <p>
-        <%=image_tag"#{@retweet.user.picture}", style: 'height:300px; width:300px;'%> 
-    </p>
-    <p><%= time_ago_in_words(@retweet.created_at) %></p>
-<%end%>
 <p>
   <strong>Título:</strong>
   <%= @tweet.title %>
@@ -49,7 +27,7 @@
 <%end%>
 <br>
 
-<%= link_to 'Retweet', new_tweet_path(@tweet), method: :post %> 
+<%#= link_to 'Retweet', new_tweet_path(@tweet), method: :post %> 
 
 <p><%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
 <p>
