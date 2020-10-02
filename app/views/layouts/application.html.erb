@@ -7,12 +7,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Mukta:wght@400;800&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav class="navbar fixed-top  navbar-dark bg-dark">
+    <nav class="navbar fixed-top  navbar-dark bg-info">
       <a class="navbar-brand text-white"><i class="fa fa-twitter"> </i> Twitter </a>
       
     </nav>
@@ -21,7 +22,9 @@
       <p class="alert"><%= alert %></p>
       <br>
       <% if user_signed_in? %>
-        <h3>Bienvenido <%= current_user.name%>!<%=image_tag"#{current_user.picture}", style: 'height:100px; width:100px;'%> </h3>
+        <h3 class= "text-bold">Bienvenid@ <%= current_user.name%>!
+        <%=image_tag"#{current_user.picture}", style: 'height:150px; width:150px;'%></h3>
+        <hr>
         <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
         <br>
       <% else %>

@@ -14,7 +14,7 @@
     <p><%= @retweet.likes.count %> <%= (@retweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
     <p><%= @retweet.retweets.count %> <%= (@retweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
     <p>
-        <strong>User:</strong>
+        <strong>Autor:</strong>
         <%= @retweet.user.name %>
     </p>
     <p>
@@ -23,12 +23,12 @@
     <p><%= time_ago_in_words(@retweet.created_at) %></p>
 <%end%>
 <p>
-  <strong>Title:</strong>
+  <strong>Título:</strong>
   <%= @tweet.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>Tweet:</strong>
   <%= @tweet.content %>
 </p>
 
@@ -48,22 +48,18 @@
             </tr>
 <%end%>
 <br>
-<% pre_retweet = @tweet.retweets.find { |retweet| retweet.user_id == current_user.id} %>
-<% if pre_retweet %>
-  <%= button_to 'Unretweet', tweet_retweet_path(@tweet, pre_retweet), method: :delete %>
-<% else %>
-  <%= link_to 'Retweet', new_tweet_path(@retweet), method: :post %>
-<% end %>
+
+<%= link_to 'Retweet', new_tweet_path(@tweet), method: :post %> 
+
 <p><%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
 <p>
-  <strong>User:</strong>
+  <strong>Autor:</strong>
   <%= @tweet.user.name %>
 </p>
-<p>
-  <%=image_tag"#{@tweet.user.picture}", style: 'height:300px; width:300px;'%> 
-</p>
-<p><%= time_ago_in_words(@tweet.created_at) %></p>
 
+<p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>
 
-<%= link_to 'Editar', edit_tweet_path(@tweet) %> |
+<% if @tweet.user == current_user %>
+    <%= link_to 'Editar', edit_tweet_path(@tweet) %> <hr>
+<%end%>
 <%= link_to 'Atrás', tweets_path %>
