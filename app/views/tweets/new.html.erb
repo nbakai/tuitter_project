@@ -1,9 +1,15 @@
 <h1>Nuevo Tweet</h1>
-    <% if @tweet.id.nil?%>
-        <%= render 'form', tweet: @tweet%> 
-    <% else %> 
-        <%redirect_to tweet_path(@retweet) %>
-    <%end %>
+   
+
+   
+<% if @retweet? %>
+  <% @retweet = Tweet.find(tweet_id) %>
+    <h3>Tweet <%= retweet.content %> </h3>
+    <p> Autor: <%= retweet.user.name %> </p>
+<%else%>
+    <%= render 'form', tweet: @tweet %>
+<%end%>
+      
 
 
 <%= link_to 'Back', tweets_path %>

@@ -28,15 +28,18 @@
 <%end%>
 <br>
 
-<%#= link_to 'Retweet', new_tweet_path(@tweet), method: :post %> 
+<%= link_to 'Retweet', new_tweet_path(@retweet = @tweet.id)%>
 
-<p><%= @tweet.retweets.count %> <%= (@tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></p>
+
 <p>
   <strong>Autor:</strong>
   <%= @tweet.user.name %>
+  <%=image_tag"#{@tweet.user.picture}", style: 'height:50px; width:50px;'%>
 </p>
 
 <p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>
+
+
 
 <% if @tweet.user == current_user %>
     <%= link_to 'Editar', edit_tweet_path(@tweet) %> <hr>

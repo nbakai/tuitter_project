@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  attr_accessor :content
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: :index
 
@@ -18,9 +19,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    if !@retweet.nil?
-      @retweet = Tweet.find(params[:id])
-    else
+    if @retweet.nil?
       @tweet = Tweet.new
     end
   end
