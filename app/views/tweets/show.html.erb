@@ -1,16 +1,15 @@
 <br>
-<div>
-  <p>
-    <strong>Título:</strong>
-    <%= @tweet.title %>
-  </p>
-</div>
-<div>
-  <p>
-    <strong>Tweet:</strong>
-    <%= @tweet.content %>
-  </p>
-</div>
+
+<p>
+  <strong>Título:</strong>
+  <%= @tweet.title %>
+</p>
+
+<p>
+  <strong>Tweet:</strong>
+  <%= @tweet.content %>
+</p>
+
 
 <div>
   <% pre_like = @tweet.likes.find { |like| like.user_id == current_user.id} %>
