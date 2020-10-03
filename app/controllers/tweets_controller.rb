@@ -5,17 +5,29 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
-    @tweets = Tweet.page(params[:page])
-    # @tweets = Tweet.my_tweets(current_user)
-    # @tweets = Tweet.my_tweets(current_user).page(params[:page])
-   
+    if params[:search]
+      @tweets = Tweet.search(params[:search]).page(params[:page]).order("created_at DESC")
+      
+    else
+      
+      @tweets = Tweet.where("user_id IN (?)", current_user.friend_ids).page(params[:page])
+      @tweets = Tweet.my_tweets(current_user).page(params[:page])
+    end
   end
 
+  
   # GET /tweets/1
   # GET /tweets/1.json
   def show
-    
+    if !@friend.nil? 
+      @users = User.all
+      @user = User.friend.find(params[:id])
+      current_user
+      if @current_user
+        @friend = Friend.where(user_id: @user.id, friend_id: @current_user.id).first
+      end
+    end
+
   end
 
   # GET /tweets/new

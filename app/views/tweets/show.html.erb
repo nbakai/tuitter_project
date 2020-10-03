@@ -38,7 +38,7 @@
   <strong>Autor:</strong>
   <%= @tweet.user.name %>
   <%=image_tag"#{@tweet.user.picture}", style: 'height:45px; width:45px;'%> <br>
-  <%= link_to 'Follow' %>
+  
 </p>
 <%= link_to 'Retweet'%>
 <%# <p><%= link_to 'Retweet', tweets_path(@tweet.id), method: :post %> 
@@ -46,6 +46,18 @@
 </p>
 <br>
 <p><%= time_ago_in_words(@tweet.created_at) %></p> <hr>
+
+
+<% if @tweet.user.name != current_user.name %>
+    <% if @friend.nil? %>
+      <%= @tweet.user.name %>
+      <%= link_to "Add Friend", friends_path(friend_id: @tweet.user.name), method: :post %>
+    <% else %>
+      <%= link_to( ("Unfollow"), "/friend/#{ @friend.id }", method: :delete) %>
+    <%end%>
+<% end %>
+
+
 
 
 

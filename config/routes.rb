@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
-  
+  resources :friends
   resources :tweets do 
     get 'tweets/:id', to: 'tweets#show', as: 'retweet'
     resources :likes

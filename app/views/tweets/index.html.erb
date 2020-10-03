@@ -1,6 +1,6 @@
-<%# <% if !user_signed_in?%> 
-<%# <h2> Crea una nueva cuenta o inicia sesión para ver Tweets!<i class="fa fa-twitter"> </i></h2> %>
-<%# <% end %> 
+<% if !user_signed_in?%> 
+  <h2> Crea una nueva cuenta o inicia sesión para ver Tweets!<i class="fa fa-twitter"> </i></h2>
+<% end  %>
 <% if user_signed_in?%>
   <%= form_with(model: @tweet=Tweet.new, local: true) do |form| %>
       
@@ -22,7 +22,10 @@
       </div>
     </div>
   <% end %>
-<%end%>
+  <%= form_tag(tweets_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+  <%= submit_tag "Search" %>
+  <% end %>
 <br>
 <hr>
 <table>
@@ -34,7 +37,7 @@
       <th> </th>
       <th>Likes</th>
       
-      <th> | Retweets</th>
+      <th>Retweets</th>
      
       <th>Creado..</th>
       
@@ -47,15 +50,15 @@
         <td><%= tweet.title %></td>
         <td><%= tweet.content %></td>
         <td><%= tweet.user.name if tweet.user %> </td> 
-        <td><%= image_tag "#{tweet.user.picture}", style: 'height:75px; width:75px;'%> |</td>
+        <td><%= image_tag "#{tweet.user.picture}", style: 'height:75px; width:75px;'%></td>
         <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? ' Like ' : ' Likes '%></td>
-        <td>| 0 Retweets |</td>
+        <td> 0 Retweets </td>
         
         <td><%= link_to time_ago_in_words(tweet.created_at), tweet %></td>
         
         <% if user_signed_in? && tweet.user_id == current_user.id%>
-          <td><%= link_to '| Editar', edit_tweet_path(tweet) %></td>
-          <td><%= link_to '| Borrar', tweet, method: :delete, data: { confirm: 'Estás seguro?' } %></td>  
+          <td><%= link_to ' Editar', edit_tweet_path(tweet) %></td>
+          <td><%= link_to ' Borrar', tweet, method: :delete, data: { confirm: 'Estás seguro?' } %></td>  
         <%end%>
       </tr>
     <% end %>
@@ -73,4 +76,4 @@
 <%= link_to 'Nuevo Tweet', new_tweet_path %>
 <br>
 <%= link_to 'Inicio', root_path %>
-<%# <%end%> 
+<%end%> 
