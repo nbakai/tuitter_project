@@ -25,7 +25,7 @@
 <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
 <% @tweet.likes.each do |tweet| %>
             <tr>
-                <td><%=image_tag"#{@tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
+                <td><%=image_tag"#{tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
             </tr>
 <%end%>
 <br>
