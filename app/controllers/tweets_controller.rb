@@ -5,8 +5,10 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.my_tweets(current_user)
-    @tweets = Tweet.my_tweets(current_user).page(params[:page])
+    @tweets = Tweet.all
+    @tweets = Tweet.page(params[:page])
+    # @tweets = Tweet.my_tweets(current_user)
+    # @tweets = Tweet.my_tweets(current_user).page(params[:page])
    
   end
 
@@ -18,9 +20,8 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    if @retweet.nil?
-      @tweet = Tweet.new
-    end
+    @tweet = Tweet.new
+   
   end
 
   # GET /tweets/1/edit
