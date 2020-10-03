@@ -1,14 +1,9 @@
 <h1>Nuevo Tweet</h1>
    
 
-   
-<% if @retweet? %>
-  <% @tweet = Tweet.find(:id) %>
-    <h3>Tweet <%= @tweet.content %> </h3>
-    <p> Autor: <%= @tweet.user.name %> </p>
-<%else%>
-    <%= render 'form', tweet: @tweet %>
-<%end%>
+  
+<%= render 'form', tweet: @tweet %>
+
       
 
 
