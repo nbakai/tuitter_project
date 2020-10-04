@@ -9,8 +9,8 @@ class TweetsController < ApplicationController
       @tweets = Tweet.search(params[:search]).page(params[:page]).order("created_at DESC")
       
     else
-      @tweets = Tweet.where("user.name IN (?)", current_user.friend.friend_id).page(params[:page])
-      # @tweets = Tweet.my_tweets(current_user).page(params[:page])
+      # @tweets = Tweet.where("user.name IN (?)", current_user.friend.friend_id).page(params[:page])
+      @tweets = Tweet.my_tweets(current_user).page(params[:page])
     end
   end
 
