@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -12,7 +13,7 @@ ActiveAdmin.register User do
   # or
   #
   # permit_params 
-    permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :name, :picture, :like, :retweet 
+    permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :name, :picture, :like, :retweet, :_destroy
     # tweets_attributes: [:title, :content, :user, :user_id, :like, :retweet, :tweet_id, :_destroy],
     # likes_attributes: [:tweet_id, :user_id, :_destroy]
     # # permitted << :other if params[:action] == 'create' && current_user.admin?
