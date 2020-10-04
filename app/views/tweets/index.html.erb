@@ -53,7 +53,7 @@
         <% arr = c.split(d)%> 
         <%arr.each do |arr|%>
           <% if arr.include?('#')%>
-          <%= print%><a href=“<%=arr%>”><%=arr%></a>
+            <%= link_to "#{arr}", root_path(search:"#{arr}") %>
           <% else%>
           <%= print%><span><%=arr%></span>
           <%end%>

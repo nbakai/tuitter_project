@@ -7,9 +7,17 @@
 
 <p>
   <strong>Tweet:</strong>
-  <%= @tweet.content %>
-
- 
+  <%# <%= @tweet.content %> 
+  <%c = @tweet.content%>
+  <% d = " "%>
+  <% arr = c.split(d)%> 
+  <%arr.each do |arr|%>
+    <% if arr.include?('#')%>
+      <%= link_to "#{arr}", root_path(search:"#{arr}") %>
+    <% else%>
+      <%= print%><span><%=arr%></span>
+    <%end%>
+  <%end%>
 </p>
 
 
