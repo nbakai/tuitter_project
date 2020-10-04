@@ -22,10 +22,8 @@
       </div>
     </div>
   <% end %>
-  <%= form_tag(tweets_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-  <%= submit_tag "Search" %>
-  <% end %>
+  <br>
+  
 <br>
 <hr>
 <table>
@@ -48,7 +46,19 @@
     <% @tweets.each do |tweet| %>
       <tr>
         <td><%= tweet.title %></td>
-        <td><%= tweet.content %></td>
+        <%# <td><%= tweet.content %> <%#</td> %>
+        <td>
+        <%c = tweet.content%>
+        <% d = " "%>
+        <% arr = c.split(d)%> 
+        <%arr.each do |arr|%>
+          <% if arr.include?('#')%>
+          <%= print%><a href=“<%=arr%>”><%=arr%></a>
+          <% else%>
+          <%= print%><span><%=arr%></span>
+          <%end%>
+        <%end%>
+        </td>
         <td><%= tweet.user.name if tweet.user %> </td> 
         <td><%= image_tag "#{tweet.user.picture}", style: 'height:75px; width:75px;'%></td>
         <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? ' Like ' : ' Likes '%></td>

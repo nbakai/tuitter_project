@@ -15,7 +15,12 @@
   <body>
     <nav class="navbar fixed-top  navbar-dark bg-info">
       <h1 class="navbar-brand text-white"><i class="fa fa-twitter"> </i> Twitter </h1>
-     
+      <form class="form-inline">
+        <%= form_tag(tweets_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Buscar tweets" %>
+        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+        <% end %>
+      </form>
     </nav>
       <br>
       <p class="notice"><%= notice %></p>
