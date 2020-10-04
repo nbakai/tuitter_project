@@ -1,11 +1,16 @@
 class FriendsController < ApplicationController
-    # def index
-    #     @tweets = Tweet.tweets_for_me(current_user)
-    #     @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-    # end
-
+    before_action :find_tweet
+    def index
+        @tweets = Tweet.tweets_for_me(current_user)
+        @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+    end
+  
     def create
-        @friend = current_user.friends.build(friend_id: params[:friend_id])
+        @friend = Friend.new
+        
+        @friend.friend_id = @tweet.user_id
+        @friend.user_id = current_user.id
+       
         if @friend.save
             flash[:notice] = "Added friend."
             redirect_to root_path
@@ -21,8 +26,8 @@ class FriendsController < ApplicationController
         flash[:notice] = "Removed friend."
         redirect_to root_path
     end
-       
-    def friend_params
-        params.require(:friend).permit(:friend_id, :user_id)
+    private
+    def find_tweet
+        @tweet = Tweet.find(params[:user_id])
     end
 end

@@ -61,7 +61,7 @@
 <% if @tweet.user.name != current_user.name %>
     <% if @friend.nil? %>
       <%= @tweet.user.name %>
-      <%= link_to "Add Friend", friends_path(friend_id: @tweet.user.name), method: :post %>
+      <%= link_to "Add Friend", friends_path(friend_id: @tweet.user_id, user_id: current_user.id), method: :post %>
     <% else %>
       <%= link_to( ("Unfollow"), "/friend/#{ @friend.id }", method: :delete) %>
     <%end%>
