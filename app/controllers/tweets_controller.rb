@@ -18,14 +18,14 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
-    if !@friend.nil? 
-      @users = User.all
-      @user = User.friend.find(params[:id])
-      current_user
-      if @current_user
-        @friend = Friend.where(user_id: @user.id, friend_id: @current_user.id).first
-      end
-    end
+    # if !@friend.nil? 
+    #   @users = User.all
+    #   @user = User.friend.find(params[:id])
+    #   current_user
+    #   if @current_user
+    #     @friend = Friend.where(user_id: @user.id, friend_id: @current_user.id).first
+    #   end
+    # end
 
   end
 

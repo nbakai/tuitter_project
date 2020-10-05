@@ -26,10 +26,15 @@ Rails.application.routes.draw do
   devise_scope :user do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
-  resources :friends
+  resources :friends, only: [:create, :destroy]
   resources :tweets do 
     get 'tweets/:id', to: 'tweets#show', as: 'retweet'
     resources :likes
+  end
+  resources :users do
+    member do
+      get :following, :followers
+    end
   end
  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
