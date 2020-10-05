@@ -1,15 +1,13 @@
 class FriendsController < ApplicationController
-    before_action :find_tweet
+    # before_action :find_tweet, only: [:index]
     def index
         @tweets = Tweet.tweets_for_me(current_user)
         @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
     end
   
     def create
-        @friend = Friend.new
+        @friend = Friend.new(friend_params)
         
-        @friend.friend_id = @tweet.user_id
-        @friend.user_id = current_user.id
        
         if @friend.save
             flash[:notice] = "Added friend."
@@ -27,7 +25,11 @@ class FriendsController < ApplicationController
         redirect_to root_path
     end
     private
-    def find_tweet
-        @tweet = Tweet.find(params[:user_id])
+    # def find_tweet
+    #     @tweet = Tweet.find(params[:user_id])
+    # end
+
+    def friend_params
+        params.permit(:friend_id, :user_id)
     end
 end
