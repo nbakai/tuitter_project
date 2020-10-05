@@ -18,19 +18,22 @@ ActiveAdmin.register User do
     # likes_attributes: [:tweet_id, :user_id, :_destroy]
     # # permitted << :other if params[:action] == 'create' && current_user.admin?
     # # permitted
-    # form do |f|
+    form do |f|
       
      
-    #   f.inputs do
-    #     f.has_many :tweets, allow_destroy: true
-    #   end
+      f.inputs do
+        f.has_many :tweets, allow_destroy: true
+      end
       
-    #   f.inputs do
-    #     f.has_many :likes, allow_destroy: true
+      f.inputs do
+        f.has_many :likes, allow_destroy: true
 
-    #   end
-    #   f.actions
-    # end
+      end
+      f.inputs do
+        f.has_many :friends, allow_destroy: true
+      end
+      f.actions
+    end
     index do
       selectable_column
       column "Nombre", :name do |user|

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :tweets do
         resources :likes
+        resources :friends
       end
     end
   end
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
       resources :likes
     end
   end
-  root 'admin/dashboard#index'
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

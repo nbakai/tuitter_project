@@ -5,7 +5,7 @@ ActiveAdmin.register Tweet do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :content, :user, :user_id, :like, :retweet, :tweet_id
+  permit_params :title, :content, :user, :user_id, :like, :retweet, :tweet_id, :_destroy
   #
   # or
   #
