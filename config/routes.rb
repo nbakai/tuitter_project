@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  namespace :admin do
+    resources :users do
+      resources :tweets do
+        resources :likes
+      end
+    end
+  end
+  namespace :admin do
+    resources :users do
+      resources :likes
+    end
+  end
+  namespace :admin do
+    resources :tweets do
+      resources :likes
+    end
+  end
+  root 'admin/dashboard#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

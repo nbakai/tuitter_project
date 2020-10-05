@@ -31,6 +31,21 @@ ActiveAdmin.register User do
     #   end
     #   f.actions
     # end
-   
-  
+    index do
+      selectable_column
+      column "Nombre", :name do |user|
+      link_to user.name, admin_user_path(user)
+    end
+    column "Tweets", :tweets_del_user do |user|
+      link_to user.tweets.count, admin_user_tweets_path(user)
+    end
+    column "Likes", :likes_del_user do |user|
+      user.likes.count
+    end
+    actions
+    
+  end
+  member_action :likes do
+    @likes =User.find(params[:id]).likes
+  end
 end
