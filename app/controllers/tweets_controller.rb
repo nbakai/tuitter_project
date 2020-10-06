@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :news]
 
   # GET /tweets
   # GET /tweets.json
@@ -13,7 +14,12 @@ class TweetsController < ApplicationController
       @tweets = Tweet.my_tweets(current_user).page(params[:page])
     end
   end
-
+  def news
+    @tweets = Tweet.my_tweets(current_user).page(params[:page])
+    
+    render json: @tweets
+  end
+  
   
   # GET /tweets/1
   # GET /tweets/1.json

@@ -1,2 +1,4 @@
-json.extract! tweet, :id, :title, :content, :user, :created_at, :updated_at
+
+json.extract! tweet, :id, :title, :content, :user, :like, :retweet
 json.url tweet_url(tweet, format: :json)
+json.partial! "shared/pagination", collection: tweet
