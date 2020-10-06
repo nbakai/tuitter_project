@@ -15,8 +15,13 @@ class TweetsController < ApplicationController
     end
   end
   def news
-    @tweets = Tweet.my_tweets(current_user).page(params[:page])
+    @tweets = Tweet.all.page(params[:page])
     
+    render json: @tweets
+  end
+  def dates
+    
+    @tweets = Tweet.find_by "created_at = ?", "2020-10-06T18:54:47.997Z"
     render json: @tweets
   end
   
