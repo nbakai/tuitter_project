@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
   resources :tweets do 
     get 'tweets/:id', to: 'tweets#show', as: 'retweet'
+    
     resources :likes
   end
   resources :users do
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
     resources :friends
   end
   resources :friends, only: [:create, :destroy]
- 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'tweets#index'
 end

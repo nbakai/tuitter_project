@@ -21,7 +21,7 @@
     <%# if current_user.following%>
       <%#=  render 'unfollow', user_id: @user.id %>
     <%# else %>
-    <%= render 'follow', user_id: @friend.user.id%>
+    <%= render 'follow', user_id: @user.id%>
     <%# end %>
   </div>
 <% end %>

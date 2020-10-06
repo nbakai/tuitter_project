@@ -1,7 +1,7 @@
 class FriendsController < ApplicationController
    
     def create
-        user = User.find_by(params[:name])
+        user = User.find(params[:user_id])
         current_user.follow(user)
         respond_to do |format|
             format.html { redirect_to root_path }

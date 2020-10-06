@@ -16,17 +16,17 @@ class User < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: true }
   validates :name, presence: true
 
-  # def follow(other_user)
-  #   active_friends.create(user_id: other_user.id)
-  # end
+  def follow(other_user)
+    active_friends.create(user_id: other_user.id)
+  end
 
   
-  # def unfollow(other_user)
-  #   active_friends.find_by(user_id: other_user.id).destroy
-  # end
-  # def following?(other_user)
-  #   following.include?(other_user)
-  # end
+  def unfollow(other_user)
+    active_friends.find_by(user_id: other_user.id).destroy
+  end
+  def following?(other_user)
+    following.include?(other_user)
+  end
 
 
 end
