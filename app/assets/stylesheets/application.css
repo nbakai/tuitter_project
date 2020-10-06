@@ -17,12 +17,12 @@
 body{
     padding-left: 20px;
     padding-right: 10px;
-    font-family: 'Inconsolata', monospace;
+    font-family: monospace;
     font-size: 16px;
 }
 
 h1, h3{
-    font-family: 'Mukta', sans-serif;
+    font-family: sans-serif;
     font-weight: 800;
     font-size: 30px;
 }

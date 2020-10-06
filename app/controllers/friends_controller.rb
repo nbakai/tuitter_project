@@ -1,14 +1,16 @@
 class FriendsController < ApplicationController
-
+   
     def create
-        user = User.find(params[:friend_id])
-        current_user.follow(user)
-        redirect_to root_path
+        @user = User.find(params[:user_id])
+        current_user.follow(@user)
+        respond_to do |format|
+            format.html { redirect_to root_path }
+        end
     end
     
     def destroy
-        user = Friend.find(params[:id]).followed
-        current_user.unfollow(user)
+        @user = Friend.find(params[:id]).followed
+        current_user.unfollow(@user)
         redirect_to root_path
     end
 
