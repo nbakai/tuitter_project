@@ -11,3 +11,8 @@
 
 * Email: chems3@mail.com
 * Password: chems3
+
+* Active Admin user:
+
+    * email: admin@example.com 
+    * password: password 
