@@ -42,8 +42,14 @@ ActiveAdmin.register User do
     column "Tweets", :tweets_del_user do |user|
       link_to user.tweets.count, admin_user_tweets_path(user)
     end
+    column "Retweets", :retweets_del_user do |user|
+       user.tweets.count
+    end
     column "Likes", :likes_del_user do |user|
       user.likes.count
+    end
+    column "Friends", :followers_del_user do |user|
+      user.followers.count
     end
     actions
     
