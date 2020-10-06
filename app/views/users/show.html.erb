@@ -2,9 +2,8 @@
 <div class="row">
   <aside class="col-md-4">
     <section >
-   
-      <h1><%= @user.name %></h1>
-    
+      <h1>Perfil: </h1>
+      <h2><%= @user.name %> <%=image_tag"#{@user.picture}", style: 'height:100px; width:100px;'%></h2>
       <span><b>Tweets:</b> <%= @user.tweets.count %></span> <br>
       <span><b>Likes:</b> <%= @user.likes.count %> <%= (@user.likes.count) == 1 ? 'Like' : 'Likes'%></span>
     </section>
@@ -22,7 +21,7 @@
     <%# if current_user.following%>
       <%#=  render 'unfollow', user_id: @user.id %>
     <%# else %>
-    <%= render 'follow', user_id: @user%>
+    <%= render 'follow', user_id: @friend.user.id%>
     <%# end %>
   </div>
 <% end %>

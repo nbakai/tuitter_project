@@ -35,7 +35,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  
+  resources :users do
+    resources :friends
+  end
   resources :friends, only: [:create, :destroy]
  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
