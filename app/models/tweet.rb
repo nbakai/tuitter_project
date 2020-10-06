@@ -12,7 +12,6 @@ class Tweet < ApplicationRecord
     scope :my_tweets, -> (current_user) {where(user_id: current_user)}
     
    
-
     def self.search(search)
         where("content LIKE ?", "%#{search}%")
     end
