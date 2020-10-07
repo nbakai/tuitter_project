@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
   def news
     @arr= []
     @hash = {}
-    @tweets = Tweet.all
+    @tweets = Tweet.limit(50)
     @tweets.each do |tweet|
       @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
     end
@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   def dates
     @arr= []
     @hash = {}
-    @tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-06 20:00') 
+    @tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-07 00:00') 
     @tweets.each do |tweet|
       @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
     end
