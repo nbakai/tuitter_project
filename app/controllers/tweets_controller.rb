@@ -1,9 +1,9 @@
 class TweetsController < ApplicationController
-  protect_from_forgery with: :null_session
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:dates, :news]
+  protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :news, :dates]
+  before_action :authenticate_user!, except: [:index, :create, :news, :dates]
 
   # GET /tweets
   # GET /tweets.json
@@ -30,12 +30,16 @@ class TweetsController < ApplicationController
   def dates
     @arr= []
     @hash = {}
-    @tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-07 00:00') 
+    
+    startdate = Date.parse(params[:startdate])
+    enddate = Date.parse(params[:enddate])
+    @tweets = Tweet.all.where(created_at: startdate..enddate) 
+    #@tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-07 00:00') 
     @tweets.each do |tweet|
       @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
     end
     @tweets = @arr
-    #@tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-06 20:00') 
+    
     # @tweets = Tweet.all.find_by "created_at < ?", "2020-10-07 00:00"
 
     render json: @tweets

@@ -40,8 +40,8 @@ Rails.application.routes.draw do
     resources :friends
   end
   
-  get '/api/:2020-10-06/:2020-10-07', to: 'tweets#dates'
   get 'api/news', to: 'tweets#news'
+  get 'api(/:startdate)(/:enddate)', to: 'tweets#dates'
   resources :friends, only: [:create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'tweets#index'
