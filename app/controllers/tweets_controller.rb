@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :news]
+  before_action :authenticate_user!, except: [:index, :news, :dates]
 
   # GET /tweets
   # GET /tweets.json
@@ -26,8 +26,9 @@ class TweetsController < ApplicationController
   end
 
   def dates
-    
-    @tweets = Tweet.find_by "created_at < ?", "2020-10-07 00:00:00"
+    @tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-06 20:00') 
+    # @tweets = Tweet.all.find_by "created_at < ?", "2020-10-07 00:00"
+
     render json: @tweets
   end
   
