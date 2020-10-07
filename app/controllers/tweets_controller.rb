@@ -15,12 +15,13 @@ class TweetsController < ApplicationController
     end
   end
   def news
+    @arr= []
     @hash = {}
     @tweets = Tweet.all
     @tweets.each do |tweet|
-      @hash = ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
+      @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
     end
-    @tweets = @hash
+    @tweets = @arr
     render json: @tweets
   end
 
