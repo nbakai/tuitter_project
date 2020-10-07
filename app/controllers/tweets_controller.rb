@@ -49,6 +49,10 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    if params[:search]
+      redirect_to tweets_path, alert: 'Busca dentro de la página de inicio por favor!'
+      @tweets = Tweet.search(params[:search]).page(params[:page]).order("created_at DESC")
+    end
     # if !@friend.nil? 
     #   @users = User.all
     #   @user = User.friend.find(params[:id])
