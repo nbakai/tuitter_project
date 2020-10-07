@@ -81,7 +81,7 @@ class TweetsController < ApplicationController
     if current_user != nil
       @tweet.user_id = current_user.id
     else 
-      @tweet.user_id = 1
+      @tweet.user_id = params[:user_id]
     end 
     respond_to do |format|
       if @tweet.save
