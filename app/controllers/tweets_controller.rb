@@ -1,8 +1,8 @@
 class TweetsController < ApplicationController
+  protect_from_forgery with: :null_session
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:create]
-  protect_from_forgery with: :null_session
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
   before_action :authenticate_user!, except: [:index, :create, :news, :dates]
 
   # GET /tweets
@@ -115,6 +115,15 @@ class TweetsController < ApplicationController
     end
   end
 
+
+def retweet
+  retweet = @tweet.retweets.build(current_user)
+  if retweet.save
+    redirect_to root_path, notice: 'Retweeted!'
+  else
+    redirect_to root_path, alert: 'Can not retweet'
+  end
+end
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy

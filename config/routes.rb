@@ -30,6 +30,9 @@ Rails.application.routes.draw do
     get 'tweets/:id', to: 'tweets#show', as: 'retweet'
     
     resources :likes
+    member do 
+      post :retweet
+    end
   end
   resources :users do
     member do
