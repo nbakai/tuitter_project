@@ -1,6 +1,9 @@
 class TweetsController < ApplicationController
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:dates, :news]
+  protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :create, :news, :dates]
 
   # GET /tweets
   # GET /tweets.json
@@ -13,7 +16,35 @@ class TweetsController < ApplicationController
       @tweets = Tweet.my_tweets(current_user).page(params[:page])
     end
   end
+  def news
+    @arr= []
+    @hash = {}
+    @tweets = Tweet.limit(50)
+    @tweets.each do |tweet|
+      @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
+    end
+    @tweets = @arr
+    render json: @tweets
+  end
 
+  def dates
+    @arr= []
+    @hash = {}
+    
+    startdate = Date.parse(params[:startdate])
+    enddate = Date.parse(params[:enddate])
+    @tweets = Tweet.all.where(created_at: startdate..enddate) 
+    #@tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-07 00:00') 
+    @tweets.each do |tweet|
+      @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
+    end
+    @tweets = @arr
+    
+    # @tweets = Tweet.all.find_by "created_at < ?", "2020-10-07 00:00"
+
+    render json: @tweets
+  end
+  
   
   # GET /tweets/1
   # GET /tweets/1.json
@@ -96,7 +127,7 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:title, :content, :user, :like)
+      params.require(:tweet).permit(:content, :user, :like)
     end
   
 end

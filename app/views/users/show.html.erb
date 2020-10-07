@@ -21,8 +21,7 @@
     <%# if current_user.following%>
       <%#=  render 'unfollow', user_id: @user.id %>
     <%# else %>
-    <%= link_to 'follow', root_path%>
-    <%#= render 'follow', user_id: @user.id%>
+    <%= render 'follow', user_id: @user.id%>
     <%# end %>
   </div>
 <% end %>
