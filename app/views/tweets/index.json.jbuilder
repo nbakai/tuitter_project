@@ -1,5 +1,5 @@
 
 
-# json.array! @tweets, partial: "tweets/tweet", as: :tweet
+json.array! @tweets, partial: "tweets/tweet", as: :tweet
 
 

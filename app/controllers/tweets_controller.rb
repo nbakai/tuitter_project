@@ -15,13 +15,18 @@ class TweetsController < ApplicationController
     end
   end
   def news
-    @tweets = Tweet.all.page(params[:page])
-    
+    @hash = {}
+    @tweets = Tweet.all
+    @tweets.each do |tweet|
+      @hash = ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
+    end
+    @tweets = @hash
     render json: @tweets
   end
+
   def dates
     
-    @tweets = Tweet.find_by "created_at = ?", "2020-10-06T18:54:47.997Z"
+    @tweets = Tweet.find_by "created_at < ?", "2020-10-07 00:00:00"
     render json: @tweets
   end
   
@@ -107,7 +112,7 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:title, :content, :user, :like)
+      params.require(:tweet).permit(:content, :user, :like)
     end
   
 end
