@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   include ActionController::HttpAuthentication::Basic::ControllerMethods
-  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:dates, :news]
+  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:dates, :news, :create]
   protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :create, :news, :dates]
@@ -49,6 +49,10 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    if params[:search]
+      redirect_to tweets_path, alert: 'Busca dentro de la página de inicio por favor!'
+      @tweets = Tweet.search(params[:search]).page(params[:page]).order("created_at DESC")
+    end
     # if !@friend.nil? 
     #   @users = User.all
     #   @user = User.friend.find(params[:id])
@@ -76,9 +80,13 @@ class TweetsController < ApplicationController
   # POST /tweets
   # POST /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
-    @tweet.user_id = current_user.id
 
+    @tweet = Tweet.new(tweet_params)
+    if current_user != nil
+      @tweet.user_id = current_user.id
+    else 
+      @tweet.user_id = params[:user_id]
+    end 
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
