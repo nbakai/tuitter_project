@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   include ActionController::HttpAuthentication::Basic::ControllerMethods
-  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:dates, :news, :create]
+  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:create]
   protect_from_forgery with: :null_session
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :create, :news, :dates]
