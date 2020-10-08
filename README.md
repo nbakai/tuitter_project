@@ -4,6 +4,7 @@
 # Link a la app:
 
 * https://fast-depths-54935.herokuapp.com/
+
 * Users:
 
 * Email: chems2@mail.com
@@ -16,3 +17,5 @@
 
     * email: admin@example.com 
     * password: password 
+    
+* Para enviar tweets por postman su usuario es su email y su password de la app.

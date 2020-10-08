@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
   resources :tweets do 
    
-    post 'tweets', to: 'tweets#retweet'
+    post 'tweets', to: 'tweets#tweet'
     resources :likes
   end
   resources :users do

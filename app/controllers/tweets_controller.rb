@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :create, :news, :dates]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
+  before_action :authenticate_user!, except: [:index, :news, :dates]
   # include ActionController::HttpAuthentication::Basic::ControllerMethods
   # http_basic_authenticate_with name: "apituit", password: "Tuits", only: :create 
 
@@ -116,29 +116,21 @@ class TweetsController < ApplicationController
   end
 
 
-def retweet
-  @retweet = Tweet.new(retweet_params)
+def tweet
+  original_tweet = Tweet.find_by(params[:id])
+  @retweet = Tweet.new(
+    user_id: current_user.id,
+    tweet_id: original_tweet.id,
+  )
+  @retweet.save
   if @retweet.save
     redirect_to tweet_path, alert: 'Retweeted!'
   else
     redirect_to root_path, alert: 'Can not retweet'
   end
+   
 end
 
-
-
-  # original_tweet = Tweet.find(tweet)
-
-  # @retweet = Tweet.new(
-  #   user_id: current_user.id,
-  #   content: original_tweet.content
-  # )
-
-  # if @retweet.save
-  #   redirect_to tweet_path, alert: 'Retweeted!'
-  # else
-  #   redirect_to root_path, alert: 'Can not retweet'
-  # end
 
   # DELETE /tweets/1
   # DELETE /tweets/1.json
@@ -158,9 +150,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user, :like, :id, :retweet, :tweet_id)
-    end
-    def retweet_params
-      params.require(:tweet).permit(:tweet_id, :content).merge(user_id: current_user.id)
+      params.require(:tweet).permit(:content, :user, :like, :id, :tweet, :tweet_id)
     end
 end
