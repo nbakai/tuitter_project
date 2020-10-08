@@ -9,8 +9,8 @@
       
       <div class="row">
         <div class="form-group col-md-8 text-justify">
-          <%= form.label :content, 'Escribe aquí tu tweet:' %> <br>
-          <%= form.text_area :content %>
+          
+          <%= form.text_area :content, placeholder:'Escribe aquí tu tweet...' %>
         </div>
 
 
@@ -43,17 +43,17 @@
         </p>
       </div>
         
-        <p> 
+        <h3> 
             <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
               <% if pre_like %>
                 <%= link_to raw('&#128128;'), tweet_like_path(tweet, pre_like), method: :delete %> 
               <% else %>
                 <%= link_to raw('&#x1F495;'), tweet_likes_path(tweet), method: :post %>
               <% end %>
-        </p>
-        <p><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? ' Like ' : ' Likes '%>
-          <%= link_to 'Retweet',  tweet_tweets_path(tweet.id), method: :post %> 
-          <%= tweet.tweet_ids.count %> </p>
+        <span><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? ' Like ' : ' Likes '%>
+              <%= tweet.tweet_ids.count %>
+              <%= link_to 'Retweet',  tweet_tweets_path(tweet.id), method: :post %></span>
+        </h3>
         <p><%= link_to time_ago_in_words(tweet.created_at), tweet %>
         <% if user_signed_in? && tweet.user_id == current_user.id%>
           <%= link_to ' Editar', edit_tweet_path(tweet) %>
