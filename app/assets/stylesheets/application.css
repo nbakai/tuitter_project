@@ -27,3 +27,28 @@ h1, h3{
     font-weight: 800;
     font-size: 30px;
 }
+.content {
+    display: block;
+    margin-left: 60px;
+  }
+.user {
+    
+    position: fixed;
+    overflow: auto;
+    width: 400px;
+    height:100%;
+    margin-right: 10px;
+    margin-top: 5px;
+    left: 10px;
+    
+}
+.contenido {
+    display: block;
+    width: 600px;
+    overflow: auto;
+    justify-content: center;
+    height: 100px;
+    border: 3px;
+    border-color: rgb(0, 174, 255);
+    border-style: solid;
+}
