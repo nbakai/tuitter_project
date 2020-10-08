@@ -1,9 +1,9 @@
 class TweetsController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :create, :news, :dates]
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
-  http_basic_authenticate_with name: "apituit", password: "Tuits", only: :create 
+  # include ActionController::HttpAuthentication::Basic::ControllerMethods
+  # http_basic_authenticate_with name: "apituit", password: "Tuits", only: :create 
 
   # GET /tweets
   # GET /tweets.json
@@ -117,27 +117,29 @@ class TweetsController < ApplicationController
 
 
 def retweet
-  #retweet = @tweet.retweets.build(user: current_user)
-  # @retweet = Tweet.new(tweet_id: @tweet.id, user: current_user, id:)
-  # if @retweet.save
-  #   redirect_to retweet, notice: 'Retweeted!'
-  # else
-  #   redirect_to root_path, alert: 'Can not retweet'
-  # end
- 
-  original_tweet = Tweet.find(@tweet.id)
-
-  @retweet = Tweet.new(
-    user_id: current_user.id,
-    content: original_tweet.content
-  )
-
+  @retweet = Tweet.new(retweet_params)
   if @retweet.save
     redirect_to tweet_path, alert: 'Retweeted!'
   else
     redirect_to root_path, alert: 'Can not retweet'
   end
 end
+
+
+
+  # original_tweet = Tweet.find(tweet)
+
+  # @retweet = Tweet.new(
+  #   user_id: current_user.id,
+  #   content: original_tweet.content
+  # )
+
+  # if @retweet.save
+  #   redirect_to tweet_path, alert: 'Retweeted!'
+  # else
+  #   redirect_to root_path, alert: 'Can not retweet'
+  # end
+
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
@@ -158,5 +160,7 @@ end
     def tweet_params
       params.require(:tweet).permit(:content, :user, :like, :id, :retweet, :tweet_id)
     end
-  
+    def retweet_params
+      params.require(:tweet).permit(:tweet_id, :content).merge(user_id: current_user.id)
+    end
 end

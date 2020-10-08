@@ -58,7 +58,7 @@
                 <%= link_to raw('&#x1F495;'), tweet_likes_path(tweet), method: :post %>
               <% end %></td>
         <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? ' Like ' : ' Likes '%></td>
-        <td><%= link_to 'Retweet',  tweet_tweets_path(tweet.id), method: :post %> </td>
+        <td><%= link_to 'Retweet',  tweet_tweets_path(tweet), method: :post %> </td>
         <td><%= tweet.tweet_ids.count %> </td>
         <td><%= link_to time_ago_in_words(tweet.created_at), tweet %></td>
         <% if user_signed_in? && tweet.user_id == current_user.id%>
