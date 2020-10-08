@@ -1,9 +1,9 @@
 class TweetsController < ApplicationController
   protect_from_forgery with: :null_session
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
-  http_basic_authenticate_with name: "apituit", password: "Tuits", only: [:create]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
   before_action :authenticate_user!, except: [:index, :create, :news, :dates]
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  http_basic_authenticate_with name: "apituit", password: "Tuits", only: :create 
 
   # GET /tweets
   # GET /tweets.json
@@ -117,9 +117,23 @@ class TweetsController < ApplicationController
 
 
 def retweet
-  retweet = @tweet.retweets.build(current_user)
-  if retweet.save
-    redirect_to root_path, notice: 'Retweeted!'
+  #retweet = @tweet.retweets.build(user: current_user)
+  # @retweet = Tweet.new(tweet_id: @tweet.id, user: current_user, id:)
+  # if @retweet.save
+  #   redirect_to retweet, notice: 'Retweeted!'
+  # else
+  #   redirect_to root_path, alert: 'Can not retweet'
+  # end
+ 
+  original_tweet = Tweet.find(@tweet.id)
+
+  @retweet = Tweet.new(
+    user_id: current_user.id,
+    content: original_tweet.content
+  )
+
+  if @retweet.save
+    redirect_to tweet_path, alert: 'Retweeted!'
   else
     redirect_to root_path, alert: 'Can not retweet'
   end
@@ -137,14 +151,12 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
-      
       @tweet = Tweet.find(params[:id])
-    
     end
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user, :like)
+      params.require(:tweet).permit(:content, :user, :like, :id, :retweet, :tweet_id)
     end
   
 end

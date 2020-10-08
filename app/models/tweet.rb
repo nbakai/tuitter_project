@@ -1,7 +1,7 @@
 class Tweet < ApplicationRecord
     belongs_to :user
-    belongs_to :source_tweet, optional: true, inverse_of: :retweets, class_name: 'Tweet', foreign_key: 'tweet_id'
-    has_many :retweets, inverse_of: :source_tweet, class_name: 'Tweet', foreign_key: 'tweet_id', dependent: :destroy
+    belongs_to :source_tweet, optional: true, inverse_of: :tweets, class_name: 'Tweet', foreign_key: 'tweet_id'
+    has_many :tweets, inverse_of: :source_tweet, class_name: 'Tweet', foreign_key: 'tweet_id', dependent: :destroy
     has_many :likes, dependent: :destroy
 
     #para ordenar la paginación

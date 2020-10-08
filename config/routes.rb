@@ -27,12 +27,9 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
   resources :tweets do 
-    get 'tweets/:id', to: 'tweets#show', as: 'retweet'
-    
+   
+    post 'tweets', to: 'tweets#retweet'
     resources :likes
-    member do 
-      post :retweet
-    end
   end
   resources :users do
     member do
