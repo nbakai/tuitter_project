@@ -14,7 +14,11 @@
 
   <body>
     <nav class="navbar fixed-top  navbar-dark bg-info">
-      <h1 class="navbar-brand text-white"><i class="fa fa-twitter"> </i> Twitter </h1>
+      <h1 class="navbar-brand text-white">
+        <%=link_to root_path%>
+                  
+        Twitter 
+      </h1>
       <form class="form-inline">
         <%= form_tag(tweets_path, :method => "get", id: "search-form") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Buscar tweets" %>
@@ -27,8 +31,13 @@
       <p class="alert"><%= alert %></p>
       <br>
       <% if user_signed_in? %>
-        <h3 class= "text-bold">Bienvenido <%= current_user.name%>!
-        <%=image_tag"#{current_user.picture}", style: 'height:150px; width:150px;'%></h3>
+      <div class="row">
+        <aside class="col-md-4">
+          <section class="user">
+            <h3 class= "text-bold">Bienvenido <%= current_user.name%>!
+            <%=image_tag"#{current_user.picture}", style: 'height:150px; width:150px;'%></h3>
+          </section>
+        </aside>
         <hr>
         <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
         <br>
@@ -38,9 +47,10 @@
         <br>
       <%end%>
       <br>
-    <%= yield %>
+      <%= yield %>
 
 
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
