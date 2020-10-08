@@ -32,13 +32,13 @@ class TweetsController < ApplicationController
     @hash = {}
     
     startdate = Date.parse(params[:startdate])
-    enddate = Date.parse(params[:enddate])
+    enddate = (Date.parse(params[:enddate])) + 1
     @tweets = Tweet.all.where(created_at: startdate..enddate) 
     #@tweets = Tweet.all.where(created_at:'2020-10-06 00:00'..'2020-10-07 00:00') 
-    @tweets.each do |tweet|
-      @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
-    end
-    @tweets = @arr
+    # @tweets.each do |tweet|
+    #   @arr += ["id": tweet.id, "content": tweet.content, "user_id": tweet.user_id, "likes": tweet.likes.count, "retweets": tweet.retweet]
+    # end
+    # @tweets = @arr
     
     # @tweets = Tweet.all.find_by "created_at < ?", "2020-10-07 00:00"
 
