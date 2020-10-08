@@ -18,4 +18,6 @@
     * email: admin@example.com 
     * password: password 
     
-* Para enviar tweets por postman su usuario es su email y su password de la app.
+* Para enviar tweets por postman: 
+    * Ocupar este link https://fast-depths-54935.herokuapp.com/tweets.json con método POST
+    * usuario es su email y su password es la misma de la app.
