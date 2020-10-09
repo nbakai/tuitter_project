@@ -12,7 +12,7 @@ class Tweet < ApplicationRecord
     
     #scope para ver mis propios tweets
     scope :my_tweets, -> (current_user) {where(user_id: current_user)}
-    
+    #scope :tweets_for_me, -> (current_user) {where(user_id: current_user).or(friend_id: current_user.friends)}
    
     def self.search(search)
         where("content LIKE ?", "%#{search}%")

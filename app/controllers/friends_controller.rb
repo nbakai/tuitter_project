@@ -9,7 +9,7 @@ class FriendsController < ApplicationController
     end
     
     def destroy
-        @user = Friend.find(params[:id])
+        @user = Friend.find(params[:id]).friend
         current_user.unfollow(@user)
         redirect_to root_path
     end

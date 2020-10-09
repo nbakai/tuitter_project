@@ -22,10 +22,10 @@ class User < ApplicationRecord
 
   
   def unfollow(other_user)
-    Friend.find_by(user_id: other_user.id).destroy
+    friends.find_by(user_id: other_user.id).destroy
   end
   def following?(other_user)
-    Friend.find_by_user_id(other_user.id)
+    following.include?(other_user)
   end
 
 
