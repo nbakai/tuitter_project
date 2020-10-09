@@ -5,10 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :tweets, :dependent => :destroy
   has_many :likes, dependent: :destroy
-  has_many :active_friends, class_name:  "Friend", foreign_key: "friend_id", dependent: :destroy
+  has_many :friends, class_name:  "Friend", foreign_key: "friend_id", dependent: :destroy
   has_many :no_friends, class_name: "Friend", foreign_key: "user_id", dependent: :destroy
  
-  has_many :following, through: :active_friends, source: :user
+  has_many :following, through: :friends, source: :user
   has_many :followers, through: :no_friends, source: :friend
 
 
@@ -17,15 +17,15 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   def follow(other_user)
-    Friend.create(user_id: other_user.id)
+    friends.create(user_id: other_user.id)
   end
 
   
   def unfollow(other_user)
-    active_friends.find_by(user_id: other_user.id).destroy
+    Friend.find_by(user_id: other_user.id).destroy
   end
   def following?(other_user)
-    active_friends.find_by_user_id(other_user.id)
+    Friend.find_by_user_id(other_user.id)
   end
 
 

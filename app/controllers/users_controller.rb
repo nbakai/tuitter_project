@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
   def index
     @user  = User.find(params[:id])
-    @user  = User.page(params[:page])
+    
     
   end
   def following
     @title = "Seguidores"
     @user  = User.find(params[:id])
-    @users = @user.following.page(params[:page])
+    @users = @user.following
      
   end
   
   def followers
     @title = "Seguidos"
     @user  = User.find(params[:id])
-    @users = @user.followers.page(params[:page])
+    @users = @user.followers
   end
 
   def show 
