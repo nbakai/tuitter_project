@@ -36,9 +36,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :users do
-    
-  end
+  
   
   get 'api/news', to: 'tweets#news'
   get 'api(/:startdate)(/:enddate)', to: 'tweets#dates'
