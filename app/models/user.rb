@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   def follow(other_user)
-    active_friends.create(user_id: other_user.id)
+    Friend.create(user_id: other_user.id)
   end
 
   
@@ -25,7 +25,7 @@ class User < ApplicationRecord
     active_friends.find_by(user_id: other_user.id).destroy
   end
   def following?(other_user)
-    following.include?(other_user)
+    active_friends.find_by_user_id(other_user.id)
   end
 
 

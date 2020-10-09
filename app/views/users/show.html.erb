@@ -8,26 +8,25 @@
       <span><b>Likes:</b> <%= @user.likes.count %> <%= (@user.likes.count) == 1 ? 'Like' : 'Likes'%></span>
     </section>
 
-  <% if @user != current_user %>
     <div>
-    <%# if current_user.following%>
-      <%#=  render 'unfollow', user_id: @user.id %>
-    <%# else %>
-      <%= render 'follow', user_id: @user.id%>
-    <%# end %>
+      <% if current_user != @user %>
+        <%# if current_user.following%>
+          <%#=  render 'unfollow', user_id: @user.id %>
+        <%# else %>
+          <%= render 'follow', user_id: @user.id%>
+        <%# end %>
+      <% end %>
     </div>
-  <% end %>
 
   <div >
       <strong> 
         <%= @user.following.count%>
       </strong>
-      following
+      Seguidores
       <strong> 
         <%= @user.followers.count %>
       </strong>
-      followers
-
+      Seguidos
   </div>
   
   <%= link_to 'Inicio', tweets_path %>

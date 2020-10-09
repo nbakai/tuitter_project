@@ -1,0 +1,4 @@
+<%= link_to current_user.active_friends.find_by(user_id: @user.id),
+    method: :delete,  data: { confirm: 'Are you sure?' } do %>
+  <button class="btn" type="submit">Unfollow</button>
+<% end %>

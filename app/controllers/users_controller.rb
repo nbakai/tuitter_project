@@ -5,14 +5,14 @@ class UsersController < ApplicationController
     
   end
   def following
-    @title = "Following"
+    @title = "Seguidores"
     @user  = User.find(params[:id])
     @users = @user.following.page(params[:page])
      
   end
   
   def followers
-    @title = "Followers"
+    @title = "Seguidos"
     @user  = User.find(params[:id])
     @users = @user.followers.page(params[:page])
   end
@@ -21,4 +21,10 @@ class UsersController < ApplicationController
     @user  = User.find(params[:id])
       
   end
+  def destroy
+    @user = Friend.find(params[:id])
+    current_user.unfollow(@user)
+    redirect_to root_path
+  end
+
 end
