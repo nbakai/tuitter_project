@@ -1,17 +1,24 @@
 <br>
-<p>
-  <strong>Tweet:</strong>
-  <%c = @tweet.content%>
-  <%d = " "%>
-  <%arr = c.split(d)%> 
-  <%arr.each do |arr|%>
-    <% if arr.include?('#')%>
-      <%= link_to "#{arr}", root_path(search:"#{arr}") %>
-    <% else%>
+<div class="col-md-8">
+  <p>
+    <strong> <%= link_to "#{@tweet.user.name}", user_path(@tweet.user.id) %></strong>
+    <%=image_tag"#{@tweet.user.picture}", style: 'height:45px; width:45px;'%> <br>
+  
+  </p>
+  <div class= "contenido ">
+    <p>
+    <%c = @tweet.content%>
+    <%d = " "%>
+    <%arr = c.split(d)%> 
+    <%arr.each do |arr|%>
+      <% if arr.include?('#')%>
+        <%= link_to "#{arr}", root_path(search:"#{arr}") %>
+      <% else%>
       <%= print%><span><%=arr%></span>
+      <%end%>
     <%end%>
-  <%end%>
-</p>
+    </p>
+  </div>
 <div>
   <h2>
     <% pre_like = @tweet.likes.find { |like| like.user_id == current_user.id} %>
@@ -22,24 +29,18 @@
     <% end %>
   </h2>
 </div>
-<p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-    <% @tweet.likes.each do |tweet| %>
-      <tr>
-          <td><%=image_tag"#{tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
-      </tr>
-<%end%>
+  <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+      <% @tweet.likes.each do |tweet| %>
+        <tr>
+            <td><%=image_tag"#{tweet.user.picture}", style: 'height:100px; width:100px;'%></td>
+        </tr>
+  <%end%>
 <br>
 
 
 
 
 
-<p>
-  <strong>Autor:</strong>
-  <%= link_to "#{@tweet.user.name}", user_path(@tweet.user.id) %>
-  <%=image_tag"#{@tweet.user.picture}", style: 'height:45px; width:45px;'%> <br>
-  
-</p>
 <%= link_to 'Retweet'%>
 <%# <p><%= link_to 'Retweet', tweets_path(@tweet.id), method: :post %> 
   
@@ -54,3 +55,4 @@
     <%= link_to 'Editar', edit_tweet_path(@tweet) %> <hr>
 <%end%>
 <%= link_to 'Atrás', tweets_path %>
+</div>

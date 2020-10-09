@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users do
-    resources :friends
+    
   end
   
   get 'api/news', to: 'tweets#news'

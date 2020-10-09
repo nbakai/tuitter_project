@@ -1,47 +1,33 @@
-<% provide(:title, @title) %>
-<div class="row">
-  <aside class="col-md-4">
+<div class="col-md-8">
+
+<%# <% provide(:title, @title) %> 
     <section >
       <h1>Perfil: </h1>
       <h2><%= @user.name %> <%=image_tag"#{@user.picture}", style: 'height:100px; width:100px;'%></h2>
       <span><b>Tweets:</b> <%= @user.tweets.count %></span> <br>
       <span><b>Likes:</b> <%= @user.likes.count %> <%= (@user.likes.count) == 1 ? 'Like' : 'Likes'%></span>
     </section>
-   
-  </aside>
-  <div class="col-md-8">
-    <h3><%= @title %></h3>
+
+    <div>
+      <% if current_user != @user %>
+        <% if current_user.following?(@user)%>
+          <%=  render 'unfollow', user_id: @user.id %>
+        <% else %>
+          <%= render 'follow', user_id: @user.id%>
+        <%end %>
+      <% end %>
+    </div>
+
+  <div >
+      <strong> 
+        <%= @user.following.count%>
+      </strong>
+      Seguidos
+      <strong> 
+        <%= @user.followers.count %>
+      </strong>
+      Seguidores
   </div>
+  
+  <%= link_to 'Inicio', tweets_path %>
 </div>
-
-
-
-<% if @user != current_user %>
-  <div>
-    <%# if current_user.following%>
-      <%#=  render 'unfollow', user_id: @user.id %>
-    <%# else %>
-    <%= render 'follow', user_id: @user.id%>
-    <%# end %>
-  </div>
-<% end %>
-
-
-
-
-
-<div >
-    <strong> 
-      <%= @user.following.count%>
-    </strong>
-    following
-
- 
-    <strong> 
-      <%= @user.followers.count %>
-    </strong>
-    followers
-
-</div>
-
-<%= link_to 'Inicio', tweets_path %>
